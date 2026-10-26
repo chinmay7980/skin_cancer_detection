@@ -1,0 +1,46 @@
+# Virtual Environment
+.venv/
+venv/
+env/
+ENV/
+
+# Python Cache & Bytecode
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.pytest_cache/
+*.egg-info/
+build/
+dist/
+
+
+# Local Dataset Files & Large Data (root-level only)
+/data/
+*.hdf5
+*.h5
+*.zip
+*.tar.gz
+*.csv
+
+# Model Checkpoints & Artifacts
+checkpoints/
+runs/
+*.pt
+*.pth
+*.pkl
+*.joblib
+*.onnx
+
+# Reports / Temporary outputs
+reports/figures/
+
+# macOS System Files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# IDEs & Secrets
+.env
+.idea/
+.vscode/

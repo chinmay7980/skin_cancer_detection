@@ -1,0 +1,34 @@
+# Default configuration for SkinRisk Fusion
+# Local dataset paths and experiment parameters
+
+data:
+  # Path to local ISIC 2024 Challenge files
+  # Can be overridden by setting the SKINRISK_DATA_DIR environment variable
+  raw_dir: "/Users/chinmaysoni/Downloads/isic-2024-challenge"
+  train_metadata: "train-metadata.csv"
+  train_images_hdf5: "train-image.hdf5"
+  test_metadata: "test-metadata.csv"
+  test_images_hdf5: "test-image.hdf5"
+
+project:
+  name: "SkinRisk Fusion"
+  target_col: "target"
+  patient_id_col: "patient_id"
+  image_id_col: "isic_id"
+  random_seed: 42
+
+hardware:
+  # Automatically detects 'mps' (Apple Silicon), 'cuda', or falls back to 'cpu'
+  preferred_device: "auto"
+  # Conservative DataLoader workers for macOS unified memory
+  num_workers: 0
+  pin_memory: false
+
+splits:
+  manifest_path: "data/splits/patient_split_manifest.csv"
+  n_splits: 5
+  seed: 42
+  train_folds: [0, 1, 2]
+  val_fold: 3
+  test_fold: 4
+
