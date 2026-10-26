@@ -1,0 +1,322 @@
+{
+  "test_partition": {
+    "total_records": 80210,
+    "positives": 77,
+    "negatives": 80133,
+    "prevalence": 0.0009599800523625484,
+    "unique_patients": 208
+  },
+  "calibration_analysis": {
+    "raw_primary": {
+      "brier_score": 0.002921,
+      "log_loss": 0.01273,
+      "mean_predicted_prob": 0.004881,
+      "true_prevalence": 0.00096,
+      "prevalence_distortion_ratio": 5.084
+    },
+    "platt_calibrated_primary": {
+      "brier_score": 0.00095,
+      "log_loss": 0.005657,
+      "mean_predicted_prob": 0.001078,
+      "true_prevalence": 0.00096,
+      "prevalence_distortion_ratio": 1.123
+    }
+  },
+  "models": [
+    {
+      "model_id": "matched_lightgbm_raw",
+      "name": "Matched Metadata LightGBM (Primary)",
+      "modality": "Metadata Only",
+      "checkpoint": "Deterministic fit (seed=42)",
+      "val_ap": 0.05095,
+      "val_roc_auc": 0.94936,
+      "pr_auc": 0.06377,
+      "roc_auc": 0.9248,
+      "threshold": 0.3841,
+      "precision": 0.07325,
+      "recall": 0.2987,
+      "f1": 0.11765,
+      "tp": 23,
+      "fp": 291,
+      "tn": 79842,
+      "fn": 54,
+      "pos_count": 77,
+      "neg_count": 80133,
+      "frozen_threshold": 0.3841,
+      "bootstrap": {
+        "n_bootstraps": 1000,
+        "valid_replicates": 1000,
+        "failed_replicates": 0,
+        "confidence_level": "95%",
+        "threshold": 0.3841,
+        "ap": {
+          "mean": 0.07445,
+          "std": 0.0273,
+          "ci_lower": 0.03205,
+          "ci_upper": 0.13654
+        },
+        "roc_auc": {
+          "mean": 0.9253,
+          "std": 0.01626,
+          "ci_lower": 0.89126,
+          "ci_upper": 0.95321
+        },
+        "precision": {
+          "mean": 0.07437,
+          "std": 0.01828,
+          "ci_lower": 0.04195,
+          "ci_upper": 0.11419
+        },
+        "recall": {
+          "mean": 0.30141,
+          "std": 0.05884,
+          "ci_lower": 0.18571,
+          "ci_upper": 0.42031
+        },
+        "f1": {
+          "mean": 0.11881,
+          "std": 0.02695,
+          "ci_lower": 0.06969,
+          "ci_upper": 0.17563
+        }
+      },
+      "bootstrap_time_sec": 31.52
+    },
+    {
+      "model_id": "matched_lightgbm_calibrated",
+      "name": "Matched Metadata LightGBM (Platt Calibrated)",
+      "modality": "Metadata Only (Calibrated)",
+      "checkpoint": "Platt Scaled (fit on val)",
+      "val_ap": 0.05095,
+      "val_roc_auc": 0.94936,
+      "pr_auc": 0.06377,
+      "roc_auc": 0.9248,
+      "threshold": 0.0312,
+      "precision": 0.07077,
+      "recall": 0.2987,
+      "f1": 0.11443,
+      "tp": 23,
+      "fp": 302,
+      "tn": 79831,
+      "fn": 54,
+      "pos_count": 77,
+      "neg_count": 80133,
+      "frozen_threshold": 0.0312,
+      "bootstrap": {
+        "n_bootstraps": 1000,
+        "valid_replicates": 1000,
+        "failed_replicates": 0,
+        "confidence_level": "95%",
+        "threshold": 0.0312,
+        "ap": {
+          "mean": 0.07445,
+          "std": 0.0273,
+          "ci_lower": 0.03205,
+          "ci_upper": 0.13654
+        },
+        "roc_auc": {
+          "mean": 0.9253,
+          "std": 0.01626,
+          "ci_lower": 0.89126,
+          "ci_upper": 0.95321
+        },
+        "precision": {
+          "mean": 0.07184,
+          "std": 0.01769,
+          "ci_lower": 0.0405,
+          "ci_upper": 0.11003
+        },
+        "recall": {
+          "mean": 0.30141,
+          "std": 0.05884,
+          "ci_lower": 0.18571,
+          "ci_upper": 0.42031
+        },
+        "f1": {
+          "mean": 0.11557,
+          "std": 0.02631,
+          "ci_lower": 0.06812,
+          "ci_upper": 0.17044
+        }
+      },
+      "bootstrap_time_sec": 35.07
+    },
+    {
+      "model_id": "matched_cnn_weighted",
+      "name": "Matched Image CNN (EfficientNet-B0)",
+      "modality": "Image CNN Only",
+      "checkpoint": "cnn_efficientnet-b0_weighted_pos_20_best.pt",
+      "val_ap": 0.01765,
+      "val_roc_auc": 0.77112,
+      "pr_auc": 0.00972,
+      "roc_auc": 0.79225,
+      "threshold": 0.9284,
+      "precision": 0.04762,
+      "recall": 0.03896,
+      "f1": 0.04286,
+      "tp": 3,
+      "fp": 60,
+      "tn": 80073,
+      "fn": 74,
+      "pos_count": 77,
+      "neg_count": 80133,
+      "frozen_threshold": 0.9284,
+      "bootstrap": {
+        "n_bootstraps": 1000,
+        "valid_replicates": 1000,
+        "failed_replicates": 0,
+        "confidence_level": "95%",
+        "threshold": 0.9284,
+        "ap": {
+          "mean": 0.01107,
+          "std": 0.00401,
+          "ci_lower": 0.00521,
+          "ci_upper": 0.02041
+        },
+        "roc_auc": {
+          "mean": 0.79227,
+          "std": 0.02694,
+          "ci_lower": 0.73653,
+          "ci_upper": 0.84633
+        },
+        "precision": {
+          "mean": 0.04742,
+          "std": 0.02546,
+          "ci_lower": 0.0,
+          "ci_upper": 0.10295
+        },
+        "recall": {
+          "mean": 0.03907,
+          "std": 0.02181,
+          "ci_lower": 0.0,
+          "ci_upper": 0.08537
+        },
+        "f1": {
+          "mean": 0.04247,
+          "std": 0.02285,
+          "ci_lower": 0.0,
+          "ci_upper": 0.09151
+        }
+      },
+      "bootstrap_time_sec": 33.39
+    },
+    {
+      "model_id": "matched_fusion_unweighted",
+      "name": "Multimodal Fusion Net (Unweighted)",
+      "modality": "Multimodal Fusion",
+      "checkpoint": "multimodal_fusion_unweighted_best.pt",
+      "val_ap": 0.02021,
+      "val_roc_auc": 0.83595,
+      "pr_auc": 0.03499,
+      "roc_auc": 0.85727,
+      "threshold": 0.5554,
+      "precision": 0.12903,
+      "recall": 0.05195,
+      "f1": 0.07407,
+      "tp": 4,
+      "fp": 27,
+      "tn": 80106,
+      "fn": 73,
+      "pos_count": 77,
+      "neg_count": 80133,
+      "frozen_threshold": 0.5554,
+      "bootstrap": {
+        "n_bootstraps": 1000,
+        "valid_replicates": 1000,
+        "failed_replicates": 0,
+        "confidence_level": "95%",
+        "threshold": 0.5554,
+        "ap": {
+          "mean": 0.04209,
+          "std": 0.02189,
+          "ci_lower": 0.0126,
+          "ci_upper": 0.09532
+        },
+        "roc_auc": {
+          "mean": 0.85797,
+          "std": 0.02475,
+          "ci_lower": 0.80531,
+          "ci_upper": 0.90146
+        },
+        "precision": {
+          "mean": 0.12911,
+          "std": 0.0738,
+          "ci_lower": 0.0,
+          "ci_upper": 0.28136
+        },
+        "recall": {
+          "mean": 0.05119,
+          "std": 0.02912,
+          "ci_lower": 0.0,
+          "ci_upper": 0.10976
+        },
+        "f1": {
+          "mean": 0.07255,
+          "std": 0.04046,
+          "ci_lower": 0.0,
+          "ci_upper": 0.15385
+        }
+      },
+      "bootstrap_time_sec": 32.6
+    },
+    {
+      "model_id": "matched_fusion_weighted",
+      "name": "Multimodal Fusion Net (Weighted pos=20)",
+      "modality": "Multimodal Fusion",
+      "checkpoint": "multimodal_fusion_weighted_pos_20_best.pt",
+      "val_ap": 0.01382,
+      "val_roc_auc": 0.83101,
+      "pr_auc": 0.06471,
+      "roc_auc": 0.85176,
+      "threshold": 0.9688,
+      "precision": 0.125,
+      "recall": 0.11688,
+      "f1": 0.12081,
+      "tp": 9,
+      "fp": 63,
+      "tn": 80070,
+      "fn": 68,
+      "pos_count": 77,
+      "neg_count": 80133,
+      "frozen_threshold": 0.9688,
+      "bootstrap": {
+        "n_bootstraps": 1000,
+        "valid_replicates": 1000,
+        "failed_replicates": 0,
+        "confidence_level": "95%",
+        "threshold": 0.9688,
+        "ap": {
+          "mean": 0.06773,
+          "std": 0.03309,
+          "ci_lower": 0.01703,
+          "ci_upper": 0.14012
+        },
+        "roc_auc": {
+          "mean": 0.85251,
+          "std": 0.02605,
+          "ci_lower": 0.79793,
+          "ci_upper": 0.90006
+        },
+        "precision": {
+          "mean": 0.12629,
+          "std": 0.03952,
+          "ci_lower": 0.05452,
+          "ci_upper": 0.20779
+        },
+        "recall": {
+          "mean": 0.11722,
+          "std": 0.03849,
+          "ci_lower": 0.04687,
+          "ci_upper": 0.1919
+        },
+        "f1": {
+          "mean": 0.12053,
+          "std": 0.03698,
+          "ci_lower": 0.04848,
+          "ci_upper": 0.19232
+        }
+      },
+      "bootstrap_time_sec": 33.19
+    }
+  ]
+}

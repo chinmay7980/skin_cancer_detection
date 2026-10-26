@@ -4,8 +4,8 @@
 **Backbone:** EfficientNet-B0 (ImageNet Pretrained Feature Extractor, 1,280 dims)  
 **Metadata Representation:** 50 Preprocessed Clinical & 3D Geometric Features  
 **Fusion Architecture:** Concatenation (1,330 dims) -> MLP (Linear 128 -> BatchNorm -> ReLU -> Dropout 0.3 -> Linear 1)  
-**Matched Training Cohort:** 240 lesions (239 malignant, 1 benign — Prevalence: 99.583%)  
-**Held-out Validation Partition:** 100 lesions (77 malignant, 23 benign — Prevalence: 77.0000%)  
+**Matched Training Cohort:** 10,000 lesions (239 malignant, 9,761 benign — Prevalence: 2.390%)  
+**Held-out Validation Partition:** 80,211 lesions (77 malignant, 80,134 benign — Prevalence: 0.0960%)  
 
 ---
 
@@ -28,10 +28,10 @@ All models below were trained on the **identical 10,000-image training cohort** 
 
 | Modality | Model Architecture | Loss Configuration | Average Precision (AP) | ROC-AUC | F1 @ 0.5 | Opt Threshold | F1 @ Opt | Confusion Matrix @ Opt |
 | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- | :--- |
-| **Metadata Only** | LightGBM Baseline (Matched) | `Binary logloss` | **0.78768** | 0.54461 | 0.8701 | 0.0010 | **0.8701** | `TP=77, FP=23, TN=0, FN=0` |
-| **Image CNN Only** | EfficientNet-B0 (Matched pos=20) | `BCEWithLogits(pos_weight=20.0)` | **0.91532** | 0.76680 | 0.6935 | 0.0917 | **0.8772** | `TP=75, FP=19, TN=4, FN=2` |
-| **Multimodal Fusion** | Multimodal Fusion Net (Unweighted) | `BCEWithLogits(pos_weight=None)` | **0.83804** | 0.57086 | 0.8701 | 0.0010 | **0.8701** | `TP=77, FP=23, TN=0, FN=0` |
-| **Multimodal Fusion** | Multimodal Fusion Net (Weighted pos=20) | `BCEWithLogits(pos_weight=20.0)` | **0.79144** | 0.50706 | 0.8701 | 0.0010 | **0.8701** | `TP=77, FP=23, TN=0, FN=0` |
+| **Metadata Only** | LightGBM Baseline (Matched) | `Binary logloss` | **0.05095** | 0.94936 | 0.0986 | 0.3841 | **0.1214** | `TP=21, FP=248, TN=79886, FN=56` |
+| **Image CNN Only** | EfficientNet-B0 (Matched pos=20) | `BCEWithLogits(pos_weight=20.0)` | **0.01765** | 0.77112 | 0.0068 | 0.9284 | **0.0719** | `TP=5, FP=57, TN=80077, FN=72` |
+| **Multimodal Fusion** | Multimodal Fusion Net (Unweighted) | `BCEWithLogits(pos_weight=None)` | **0.02021** | 0.83595 | 0.0588 | 0.5554 | **0.0734** | `TP=4, FP=28, TN=80106, FN=73` |
+| **Multimodal Fusion** | Multimodal Fusion Net (Weighted pos=20) | `BCEWithLogits(pos_weight=20.0)` | **0.01382** | 0.83101 | 0.0092 | 0.9688 | **0.0614** | `TP=5, FP=81, TN=80053, FN=72` |
 
 *Precision-Recall curves plotted and saved to:* [reports/figures/phase5_pr_curves.png](file:///Users/chinmaysoni/Desktop/skin_cancer_detection/reports/figures/phase5_pr_curves.png)
 
