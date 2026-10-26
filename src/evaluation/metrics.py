@@ -65,11 +65,13 @@ def find_optimal_f1_threshold(
     y_true = np.asarray(y_true).astype(int)
     y_prob = np.asarray(y_prob).astype(float)
 
-    thresholds = np.linspace(0.001, 0.95, n_thresholds)
+    # Sweep full probability spectrum (up to 0.999 for heavily-weighted models)
+    thresholds = np.linspace(0.001, 0.999, n_thresholds)
     best_thresh = 0.5
     best_f1 = -1.0
     best_prec = 0.0
     best_rec = 0.0
+    best_tp, best_fp, best_tn, best_fn = 0, 0, 0, 0
 
     for t in thresholds:
         y_pred = (y_prob >= t).astype(int)
@@ -79,12 +81,18 @@ def find_optimal_f1_threshold(
             best_thresh = float(t)
             best_prec = float(precision_score(y_true, y_pred, zero_division=0))
             best_rec = float(recall_score(y_true, y_pred, zero_division=0))
+            cm = confusion_matrix(y_true, y_pred, labels=[0, 1])
+            best_tn, best_fp, best_fn, best_tp = [int(v) for v in cm.ravel()]
 
     return {
         "optimal_threshold": round(best_thresh, 4),
         "f1_at_optimal": round(best_f1, 5),
         "precision_at_optimal": round(best_prec, 5),
         "recall_at_optimal": round(best_rec, 5),
+        "tp_at_optimal": best_tp,
+        "fp_at_optimal": best_fp,
+        "tn_at_optimal": best_tn,
+        "fn_at_optimal": best_fn,
     }
 
 
